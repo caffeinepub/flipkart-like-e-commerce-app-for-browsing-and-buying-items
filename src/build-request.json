@@ -1,0 +1,249 @@
+{
+  "kind": "build_request",
+  "title": "Flipkart-like e-commerce app for browsing and buying items",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a responsive e-commerce home experience with a top navigation bar (logo, search box, cart link, sign-in/out), featured banner, and category shortcuts.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Home page loads without errors on mobile and desktop widths",
+        "Navbar includes search input, Cart link with item count badge, and Sign in/Sign out control",
+        "Home shows a featured banner and at least 6 category shortcuts"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement product catalog browsing with pagination or incremental loading, including product cards that show image, title, price, rating, and an 'Add to cart' button.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Product list renders product cards with image, title, price, rating",
+        "Users can load more products (pagination or incremental load)",
+        "Clicking 'Add to cart' adds the product to the cart and updates the cart badge"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement search and filtering for products: text search, category filter, price range filter, and sort (Relevance, Price: Low to High, Price: High to Low, Rating).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Typing a search term updates results",
+        "Selecting a category filters results",
+        "Price range filter and sort options change the displayed product list",
+        "Filter state is reflected in the UI and survives page refresh via URL query parameters or local storage"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Create a product details page showing a larger image gallery, full description/specs, price, rating, stock status, quantity selector, and 'Add to cart' button.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Navigating from a product card opens a product detail page",
+        "User can select quantity (bounded by available stock)",
+        "Add to cart from detail page updates cart state and cart badge"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement a cart page with editable quantities, remove item, per-item subtotal, cart subtotal, and a 'Proceed to checkout' button.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Cart shows all items currently added for the signed-in user (or local guest cart if not signed in)",
+        "Quantity changes immediately update subtotals and totals",
+        "Removing an item updates totals and the cart badge",
+        "Proceed to checkout is disabled when cart is empty"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement a checkout flow that collects shipping address and contact info, shows an order summary, and places an order (no real payment processing).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Checkout form validates required fields (name, phone/email, address lines, city, postal code)",
+        "Order summary matches cart totals",
+        "Placing an order creates an order record, clears the cart, and navigates to an order confirmation screen",
+        "UI clearly indicates that payment is not processed (e.g., 'Cash on delivery (demo)')"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add an 'Orders' page for signed-in users to view past orders and order details (items, totals, shipping info, status).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Signed-in user can see a list of their orders",
+        "Selecting an order shows a details view with items and shipping info",
+        "Orders persist across reloads"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add Internet Identity authentication support and user session-aware behavior: signed-in users have server-backed cart and orders; signed-out users can browse and maintain a local cart that can be merged on sign-in.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can sign in and sign out using Internet Identity",
+        "Signed-in state is reflected in the navbar",
+        "Guest cart persists locally and can be merged into the signed-in cart on sign-in (with sensible quantity combining)",
+        "Orders require sign-in (user is prompted to sign in if attempting to place an order while signed out)"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Backend: implement Motoko data models and APIs for products, categories, carts, and orders, including seed/sample product data available on first deploy.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes query/update methods to list products, fetch product by id, list categories, and search/filter/sort products",
+        "Backend stores per-user cart (by caller principal) and supports add/update/remove/clear operations",
+        "Backend stores per-user orders and supports create + list + get-by-id",
+        "On a fresh deploy, at least 30 sample products across multiple categories are available"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Frontend: implement data fetching and caching using React Query for product lists/details, cart, and orders; include loading, empty, and error states for all screens.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All major screens have visible loading states while data loads",
+        "Empty states exist for no search results, empty cart, and no orders",
+        "Errors are shown with a retry action where appropriate",
+        "React Query caching prevents unnecessary refetches during navigation"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Apply a coherent visual theme across the app (colors, typography, spacing, components) with a distinct shopping-market style using warm orange/amber accents, off-white backgrounds, and charcoal text (avoid blue/purple).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All pages use consistent typography scale, spacing, and button/input styles",
+        "Primary actions use the warm accent color consistently",
+        "No default blue/purple theme dominates the UI"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Add generated static images to the frontend and use them in the UI (store in frontend/public/assets/generated) for logo, hero banner, and empty-state illustration.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a app us flipkart for buy item"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated with the specified filenames",
+        "Navbar uses the generated logo image",
+        "Home uses the generated hero banner image",
+        "Cart or search results uses the generated empty-state illustration when appropriate"
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in backend main actor file).",
+    "Do not edit any frontend files under immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Use English for all user-facing UI text."
+  ],
+  "nonGoals": [
+    "Real payment processing or payment gateway integration",
+    "Seller/admin portal for managing inventory (admin CRUD)",
+    "Real-time order tracking, push notifications, SMS/email integration",
+    "Third-party authentication providers other than Internet Identity"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Simple shopping bag logo mark with warm orange/amber and charcoal on transparent background (app-logo.dim_256x256.png)",
+      "Wide e-commerce hero banner illustration with abstract shopping elements in warm orange/amber palette (hero-banner.dim_1600x600.png)",
+      "Minimal empty-state illustration showing an empty cart in warm orange/amber palette on transparent background (empty-cart.dim_800x600.png)"
+    ],
+    "edits": []
+  }
+}

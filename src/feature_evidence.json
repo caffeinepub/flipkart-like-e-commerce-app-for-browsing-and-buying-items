@@ -1,0 +1,247 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-responsive-e-commerce-home-experience-with-a-top-navigation-bar-logo-search-box-cart-link-sign-in-out-featured-banner-and-category-shortcuts",
+      "featureTitle": "Create a responsive e-commerce home experience with a top navigation bar (logo, search box, cart link, sign-in/out), featured banner, and category shortcuts.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/lib/categories.ts",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-product-catalog-browsing-with-pagination-or-incremental-loading-including-product-cards-that-show-image-title-price-rating-and-an-add-to-cart-button",
+      "featureTitle": "Implement product catalog browsing with pagination or incremental loading, including product cards that show image, title, price, rating, and an 'Add to cart' button.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ProductCard.tsx",
+        "frontend/src/lib/money.ts",
+        "frontend/src/pages/CatalogPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-search-and-filtering-for-products-text-search-category-filter-price-range-filter-and-sort-relevance-price-low-to-high-price-high-to-low-rating",
+      "featureTitle": "Implement search and filtering for products: text search, category filter, price range filter, and sort (Relevance, Price: Low to High, Price: High to Low, Rating).",
+      "files": [
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/pages/CatalogPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-product-details-page-showing-a-larger-image-gallery-full-description-specs-price-rating-stock-status-quantity-selector-and-add-to-cart-button",
+      "featureTitle": "Create a product details page showing a larger image gallery, full description/specs, price, rating, stock status, quantity selector, and 'Add to cart' button.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ProductCard.tsx",
+        "frontend/src/pages/ProductDetailsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-cart-page-with-editable-quantities-remove-item-per-item-subtotal-cart-subtotal-and-a-proceed-to-checkout-button",
+      "featureTitle": "Implement a cart page with editable quantities, remove item, per-item subtotal, cart subtotal, and a 'Proceed to checkout' button.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/lib/cartLocal.ts",
+        "frontend/src/pages/CartPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-checkout-flow-that-collects-shipping-address-and-contact-info-shows-an-order-summary-and-places-an-order-no-real-payment-processing",
+      "featureTitle": "Implement a checkout flow that collects shipping address and contact info, shows an order summary, and places an order (no real payment processing).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/lib/validation.ts",
+        "frontend/src/pages/CheckoutPage.tsx",
+        "frontend/src/pages/OrderConfirmationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-orders-page-for-signed-in-users-to-view-past-orders-and-order-details-items-totals-shipping-info-status",
+      "featureTitle": "Add an 'Orders' page for signed-in users to view past orders and order details (items, totals, shipping info, status).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/pages/OrderDetailsPage.tsx",
+        "frontend/src/pages/OrdersPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-internet-identity-authentication-support-and-user-session-aware-behavior-signed-in-users-have-server-backed-cart-and-orders-signed-out-users-can-browse-and-maintain-a-local-cart-that-can-be-merged-on-sign-in",
+      "featureTitle": "Add Internet Identity authentication support and user session-aware behavior: signed-in users have server-backed cart and orders; signed-out users can browse and maintain a local cart that can be merged on sign-in.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AuthButton.tsx",
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/pages/CheckoutPage.tsx",
+        "frontend/src/pages/OrdersPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-frontend-implement-data-fetching-and-caching-using-react-query-for-product-lists-details-cart-and-orders-include-loading-empty-and-error-states-for-all-screens",
+      "featureTitle": "Frontend: implement data fetching and caching using React Query for product lists/details, cart, and orders; include loading, empty, and error states for all screens.",
+      "files": [
+        "frontend/src/components/QueryState.tsx",
+        "frontend/src/pages/CartPage.tsx",
+        "frontend/src/pages/CatalogPage.tsx",
+        "frontend/src/pages/CheckoutPage.tsx",
+        "frontend/src/pages/OrdersPage.tsx",
+        "frontend/src/pages/ProductDetailsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-coherent-visual-theme-across-the-app-colors-typography-spacing-components-with-a-distinct-shopping-market-style-using-warm-orange-amber-accents-off-white-backgrounds-and-charcoal-text-avoid-blue-purple",
+      "featureTitle": "Apply a coherent visual theme across the app (colors, typography, spacing, components) with a distinct shopping-market style using warm orange/amber accents, off-white backgrounds, and charcoal text (avoid blue/purple).",
+      "files": [
+        "frontend/index.css",
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/components/ProductCard.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-images-to-the-frontend-and-use-them-in-the-ui-store-in-frontend-public-assets-generated-for-logo-hero-banner-and-empty-state-illustration",
+      "featureTitle": "Add generated static images to the frontend and use them in the UI (store in frontend/public/assets/generated) for logo, hero banner, and empty-state illustration.",
+      "files": [
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/pages/CartPage.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

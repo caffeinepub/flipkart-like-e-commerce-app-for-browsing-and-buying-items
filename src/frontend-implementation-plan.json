@@ -1,0 +1,444 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Flipkart-like e-commerce frontend (browsing, cart, checkout, orders, II auth)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Build a responsive home experience with navbar (logo, search, cart badge, sign-in/out), featured banner, and category shortcuts.",
+      "acceptanceCriteria": [
+        "Home page loads without errors on mobile and desktop widths",
+        "Navbar includes search input, Cart link with item count badge, and Sign in/Sign out control",
+        "Home shows a featured banner and at least 6 category shortcuts"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the root app layout and route structure that renders the navbar and the Home view (and other required routes). Ensure responsive layout wrappers are in place."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "create",
+          "description": "Implement the top navigation bar with generated logo image, search input (drives catalog query state), cart link with badge, and sign-in/sign-out control. Use shadcn-ui components (e.g., Button/Input) to keep styling consistent. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Implement the home page hero section using the generated hero banner image and render at least 6 category shortcuts that navigate to filtered browsing. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/categories.ts",
+          "operation": "create",
+          "description": "Add a frontend category shortcut definition list (at least 6) used by the Home page for quick filtering/navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement product catalog browsing with incremental loading and product cards (image/title/price/rating) with Add to cart.",
+      "acceptanceCriteria": [
+        "Product list renders product cards with image, title, price, rating",
+        "Users can load more products (pagination or incremental load)",
+        "Clicking 'Add to cart' adds the product to the cart and updates the cart badge"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CatalogPage.tsx",
+          "operation": "create",
+          "description": "Create the main product browsing view with incremental loading (e.g., 'Load more') and a responsive grid of product cards."
+        },
+        {
+          "path": "frontend/src/components/ProductCard.tsx",
+          "operation": "create",
+          "description": "Implement product card UI showing image, title, price, rating, and 'Add to cart'. Use shadcn-ui Card/Button/Badge where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/queries/products.ts",
+          "operation": "create",
+          "description": "Add React Query hooks for fetching product lists with caching and for fetching additional pages/batches for incremental loading (frontend-side batching if needed)."
+        },
+        {
+          "path": "frontend/src/queries/cart.ts",
+          "operation": "create",
+          "description": "Add React Query hooks/mutations for cart operations (add/update/remove/clear) and cache invalidation so the navbar badge and cart page stay in sync for signed-in users."
+        },
+        {
+          "path": "frontend/src/lib/money.ts",
+          "operation": "create",
+          "description": "Add helpers to format bigint price/total values consistently across product cards, cart, and checkout."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the Catalog page into routing and ensure navigation from Home category shortcuts and navbar search leads to product browsing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add product search, category filter, price range filter, and sorting with state persisted via URL query parameters.",
+      "acceptanceCriteria": [
+        "Typing a search term updates results",
+        "Selecting a category filters results",
+        "Price range filter and sort options change the displayed product list",
+        "Filter state is reflected in the UI and survives page refresh via URL query parameters or local storage"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CatalogFilters.tsx",
+          "operation": "create",
+          "description": "Implement filter controls: text search, category filter, price range, and sort options. Use shadcn-ui Input/Select/Slider components if available. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/catalogState.ts",
+          "operation": "create",
+          "description": "Implement helpers to read/write catalog filter state to URL query parameters (and optionally fallback to local storage), including parsing/serialization."
+        },
+        {
+          "path": "frontend/src/pages/CatalogPage.tsx",
+          "operation": "modify",
+          "description": "Integrate filters into the catalog: keep UI state in sync with URL query parameters, refetch/update visible products when filters change, and ensure refresh restores the same results."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Connect navbar search input to catalog query parameters so searches update results and persist via the URL. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/queries/products.ts",
+          "operation": "modify",
+          "description": "Update product list query to accept filter/sort parameters and provide stable React Query keys for caching across navigations."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Create a product details page with image gallery, description/specs, price/rating/stock, quantity selector, and Add to cart.",
+      "acceptanceCriteria": [
+        "Navigating from a product card opens a product detail page",
+        "User can select quantity (bounded by available stock)",
+        "Add to cart from detail page updates cart state and cart badge"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ProductDetailsPage.tsx",
+          "operation": "create",
+          "description": "Implement product details view with image gallery (use product.imageUrls), description/specs section, stock status, bounded quantity selector, and Add to cart."
+        },
+        {
+          "path": "frontend/src/components/ImageGallery.tsx",
+          "operation": "create",
+          "description": "Create a simple image gallery component for product detail images (thumbnails + selected image), optimized for mobile/desktop layouts."
+        },
+        {
+          "path": "frontend/src/queries/products.ts",
+          "operation": "modify",
+          "description": "Add React Query hook for product details fetching with caching and error handling."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the product details route and ensure product cards link/navigate to it."
+        },
+        {
+          "path": "frontend/src/components/ProductCard.tsx",
+          "operation": "modify",
+          "description": "Add navigation from the card (e.g., clicking image/title) to the product detail route."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Implement a cart page with editable quantities, remove, subtotals/totals, and a disabled checkout CTA when empty.",
+      "acceptanceCriteria": [
+        "Cart shows all items currently added for the signed-in user (or local guest cart if not signed in)",
+        "Quantity changes immediately update subtotals and totals",
+        "Removing an item updates totals and the cart badge",
+        "Proceed to checkout is disabled when cart is empty"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CartPage.tsx",
+          "operation": "create",
+          "description": "Implement cart page UI: list items with quantity editor and remove, show per-item subtotals and cart subtotal, and 'Proceed to checkout' disabled when empty. Use generated empty-cart illustration when cart is empty."
+        },
+        {
+          "path": "frontend/src/components/CartItemRow.tsx",
+          "operation": "create",
+          "description": "Implement a cart line-item row component with editable quantity and remove action. Use shadcn-ui Button/Input where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/cartLocal.ts",
+          "operation": "create",
+          "description": "Implement guest cart persistence in localStorage (add/update/remove/clear) and helpers to compute totals and item count for the navbar badge."
+        },
+        {
+          "path": "frontend/src/queries/cart.ts",
+          "operation": "modify",
+          "description": "Add logic to support both signed-in server-backed cart (via actor) and guest local cart (via localStorage), exposing a unified interface to the UI."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Ensure cart badge reflects either signed-in cart item count (React Query) or guest local cart item count, updating immediately on changes."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the cart route and ensure navbar Cart link navigates to it."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement checkout flow (shipping/contact form + order summary) and place order (no real payment).",
+      "acceptanceCriteria": [
+        "Checkout form validates required fields (name, phone/email, address lines, city, postal code)",
+        "Order summary matches cart totals",
+        "Placing an order creates an order record, clears the cart, and navigates to an order confirmation screen",
+        "UI clearly indicates that payment is not processed (e.g., 'Cash on delivery (demo)')"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CheckoutPage.tsx",
+          "operation": "create",
+          "description": "Implement checkout page with shipping/contact form validation, order summary (from current cart), and 'Cash on delivery (demo)' indicator. On success, clear cart and navigate to confirmation."
+        },
+        {
+          "path": "frontend/src/pages/OrderConfirmationPage.tsx",
+          "operation": "create",
+          "description": "Implement order confirmation screen that shows placed order id, summary totals, and next actions (e.g., view orders, continue shopping)."
+        },
+        {
+          "path": "frontend/src/queries/orders.ts",
+          "operation": "create",
+          "description": "Add React Query mutations to place an order and queries to fetch orders; ensure proper cache invalidation (cart cleared, orders refreshed)."
+        },
+        {
+          "path": "frontend/src/lib/validation.ts",
+          "operation": "create",
+          "description": "Add lightweight client-side validators for required checkout fields and formatting helpers for displaying validation messages."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register checkout and confirmation routes and ensure Cart 'Proceed to checkout' navigates to checkout when enabled."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add Orders page for signed-in users to view order history and order details.",
+      "acceptanceCriteria": [
+        "Signed-in user can see a list of their orders",
+        "Selecting an order shows a details view with items and shipping info",
+        "Orders persist across reloads"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/OrdersPage.tsx",
+          "operation": "create",
+          "description": "Implement orders list view for signed-in users with loading/empty/error states and navigation to an order details view."
+        },
+        {
+          "path": "frontend/src/pages/OrderDetailsPage.tsx",
+          "operation": "create",
+          "description": "Implement order details view showing items, totals, shipping info, and status."
+        },
+        {
+          "path": "frontend/src/queries/orders.ts",
+          "operation": "modify",
+          "description": "Add/extend React Query hooks for fetching user orders and fetching a single order by id with caching."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Add an 'Orders' navigation entry that is visible/enabled for signed-in users; guide signed-out users to sign in. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register orders routes (/orders and /orders/:id) and ensure they are reachable from navbar and confirmation page."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add Internet Identity authentication with session-aware behavior (guest cart, server cart, merge on sign-in; orders require sign-in).",
+      "acceptanceCriteria": [
+        "User can sign in and sign out using Internet Identity",
+        "Signed-in state is reflected in the navbar",
+        "Guest cart persists locally and can be merged into the signed-in cart on sign-in (with sensible quantity combining)",
+        "Orders require sign-in (user is prompted to sign in if attempting to place an order while signed out)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AuthButton.tsx",
+          "operation": "create",
+          "description": "Create a sign-in/sign-out button using the existing Internet Identity hook and clear React Query cache on logout. Use shadcn-ui Button for consistent styling. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Implement first-login profile setup modal (name/email/phone) backed by getCallerUserProfile/saveCallerUserProfile. Use shadcn-ui Dialog and form inputs. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/queries/auth.ts",
+          "operation": "create",
+          "description": "Add React Query hook(s) for current user profile and role (as needed) using stable query keys; ensure the profile modal does not flash by following the selected authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/queries/cart.ts",
+          "operation": "modify",
+          "description": "Add merge-on-login behavior: when identity becomes available, read guest cart from localStorage, call backend mergeCart, then clear local cart and refetch server cart."
+        },
+        {
+          "path": "frontend/src/pages/CheckoutPage.tsx",
+          "operation": "modify",
+          "description": "Gate order placement behind authentication: if signed out, prompt the user to sign in (and optionally redirect back after sign-in) before calling place order."
+        },
+        {
+          "path": "frontend/src/pages/OrdersPage.tsx",
+          "operation": "modify",
+          "description": "Require sign-in to view orders: show a clear sign-in prompt when unauthenticated, and only fetch orders when authenticated."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Render authenticated user state in the navbar (use user profile name when available; avoid showing principal id) and integrate the AuthButton. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add top-level wiring for profile setup modal visibility and ensure sign-in state affects route access (orders/checkout behaviors) without introducing additional unnecessary routes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Use React Query for data fetching/caching across products, cart, and orders with loading/empty/error states and retry.",
+      "acceptanceCriteria": [
+        "All major screens have visible loading states while data loads",
+        "Empty states exist for no search results, empty cart, and no orders",
+        "Errors are shown with a retry action where appropriate",
+        "React Query caching prevents unnecessary refetches during navigation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/QueryState.tsx",
+          "operation": "create",
+          "description": "Create reusable UI helpers for loading/empty/error states with optional retry action, to standardize state handling across screens. Use shadcn-ui Button where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/CatalogPage.tsx",
+          "operation": "modify",
+          "description": "Add explicit loading/empty/error states for product results; provide retry action on errors; ensure cached navigation feels instant where possible."
+        },
+        {
+          "path": "frontend/src/pages/ProductDetailsPage.tsx",
+          "operation": "modify",
+          "description": "Add loading skeleton/state, not-found/error UI, and retry action using shared QueryState helper."
+        },
+        {
+          "path": "frontend/src/pages/CartPage.tsx",
+          "operation": "modify",
+          "description": "Add loading state (signed-in cart fetch), empty state (using generated illustration), and error handling with retry where applicable."
+        },
+        {
+          "path": "frontend/src/pages/CheckoutPage.tsx",
+          "operation": "modify",
+          "description": "Add loading/disabled states during order placement and show actionable errors with retry when order placement fails."
+        },
+        {
+          "path": "frontend/src/pages/OrdersPage.tsx",
+          "operation": "modify",
+          "description": "Add loading/empty/error states for orders list and provide retry action."
+        },
+        {
+          "path": "frontend/src/queries/products.ts",
+          "operation": "modify",
+          "description": "Tune React Query keys, stale times, and enabled flags to prevent unnecessary refetches during navigation while keeping results correct."
+        },
+        {
+          "path": "frontend/src/queries/orders.ts",
+          "operation": "modify",
+          "description": "Tune caching and invalidation after placing an order so orders list and order details stay consistent across navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Apply a warm orange/amber shopping theme with off-white backgrounds and charcoal text across the app (avoid blue/purple).",
+      "acceptanceCriteria": [
+        "All pages use consistent typography scale, spacing, and button/input styles",
+        "Primary actions use the warm accent color consistently",
+        "No default blue/purple theme dominates the UI"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create the CSS file imported by frontend/src/main.tsx and define theme CSS variables to match warm orange/amber accents, off-white backgrounds, and charcoal text, overriding any default blue/purple feel."
+        },
+        {
+          "path": "frontend/index.css",
+          "operation": "modify",
+          "description": "Align base Tailwind/CSS variable defaults with the warm theme (primary/accent/ring/chart/sidebar variables as needed) so shadcn-ui components inherit the desired palette."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Ensure navbar styling (background, borders, inputs, buttons) matches the warm theme and uses consistent spacing/typography. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProductCard.tsx",
+          "operation": "modify",
+          "description": "Ensure product card styling matches the theme (charcoal text, warm accent for primary actions) and uses consistent typographic scale. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Add generated static images (logo, hero banner, empty-cart) under public assets and use them in the UI.",
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated with the specified filenames",
+        "Navbar uses the generated logo image",
+        "Home uses the generated hero banner image",
+        "Cart or search results uses the generated empty-state illustration when appropriate"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/app-logo.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated static logo image at frontend/public/assets/generated/app-logo.dim_256x256.png and ensure it is referenced by the navbar."
+        },
+        {
+          "path": "frontend/public/assets/generated/hero-banner.dim_1600x600.png",
+          "operation": "create",
+          "description": "Add the generated static hero banner image at frontend/public/assets/generated/hero-banner.dim_1600x600.png and ensure it is referenced by the home page hero."
+        },
+        {
+          "path": "frontend/public/assets/generated/empty-cart.dim_800x600.png",
+          "operation": "create",
+          "description": "Add the generated empty-state illustration at frontend/public/assets/generated/empty-cart.dim_800x600.png and ensure it is referenced by cart empty state (and/or no results state)."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Wire frontend/public/assets/generated/app-logo.dim_256x256.png into the navbar logo area. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Wire frontend/public/assets/generated/hero-banner.dim_1600x600.png into the home hero/featured banner section."
+        },
+        {
+          "path": "frontend/src/pages/CartPage.tsx",
+          "operation": "modify",
+          "description": "Wire frontend/public/assets/generated/empty-cart.dim_800x600.png into the empty cart state UI."
+        }
+      ]
+    }
+  ]
+}

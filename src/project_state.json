@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build an e-commerce shopping app similar to Flipkart for buying items.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Simple shopping bag logo mark with warm orange/amber and charcoal on transparent background (app-logo.dim_256x256.png)\n- Wide e-commerce hero banner illustration with abstract shopping elements in warm orange/amber palette (hero-banner.dim_1600x600.png)\n- Minimal empty-state illustration showing an empty cart in warm orange/amber palette on transparent background (empty-cart.dim_800x600.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-e-commerce-home-experience-with-a-top-navigation-bar-logo-search-box-cart-link-sign-in-out-featured-banner-and-category-shortcuts",
+      "title": "Create a responsive e-commerce home experience with a top navigation bar (logo, search box, cart link, sign-in/out), featured banner, and category shortcuts.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-product-catalog-browsing-with-pagination-or-incremental-loading-including-product-cards-that-show-image-title-price-rating-and-an-add-to-cart-button",
+      "title": "Implement product catalog browsing with pagination or incremental loading, including product cards that show image, title, price, rating, and an 'Add to cart' button.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-search-and-filtering-for-products-text-search-category-filter-price-range-filter-and-sort-relevance-price-low-to-high-price-high-to-low-rating",
+      "title": "Implement search and filtering for products: text search, category filter, price range filter, and sort (Relevance, Price: Low to High, Price: High to Low, Rating).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-product-details-page-showing-a-larger-image-gallery-full-description-specs-price-rating-stock-status-quantity-selector-and-add-to-cart-button",
+      "title": "Create a product details page showing a larger image gallery, full description/specs, price, rating, stock status, quantity selector, and 'Add to cart' button.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-cart-page-with-editable-quantities-remove-item-per-item-subtotal-cart-subtotal-and-a-proceed-to-checkout-button",
+      "title": "Implement a cart page with editable quantities, remove item, per-item subtotal, cart subtotal, and a 'Proceed to checkout' button.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-checkout-flow-that-collects-shipping-address-and-contact-info-shows-an-order-summary-and-places-an-order-no-real-payment-processing",
+      "title": "Implement a checkout flow that collects shipping address and contact info, shows an order summary, and places an order (no real payment processing).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-orders-page-for-signed-in-users-to-view-past-orders-and-order-details-items-totals-shipping-info-status",
+      "title": "Add an 'Orders' page for signed-in users to view past orders and order details (items, totals, shipping info, status).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-internet-identity-authentication-support-and-user-session-aware-behavior-signed-in-users-have-server-backed-cart-and-orders-signed-out-users-can-browse-and-maintain-a-local-cart-that-can-be-merged-on-sign-in",
+      "title": "Add Internet Identity authentication support and user session-aware behavior: signed-in users have server-backed cart and orders; signed-out users can browse and maintain a local cart that can be merged on sign-in.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-frontend-implement-data-fetching-and-caching-using-react-query-for-product-lists-details-cart-and-orders-include-loading-empty-and-error-states-for-all-screens",
+      "title": "Frontend: implement data fetching and caching using React Query for product lists/details, cart, and orders; include loading, empty, and error states for all screens.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-visual-theme-across-the-app-colors-typography-spacing-components-with-a-distinct-shopping-market-style-using-warm-orange-amber-accents-off-white-backgrounds-and-charcoal-text-avoid-blue-purple",
+      "title": "Apply a coherent visual theme across the app (colors, typography, spacing, components) with a distinct shopping-market style using warm orange/amber accents, off-white backgrounds, and charcoal text (avoid blue/purple).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-images-to-the-frontend-and-use-them-in-the-ui-store-in-frontend-public-assets-generated-for-logo-hero-banner-and-empty-state-illustration",
+      "title": "Add generated static images to the frontend and use them in the UI (store in frontend/public/assets/generated) for logo, hero banner, and empty-state illustration.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a Flipkart-like e-commerce app for browsing and buying items",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Backend: implement Motoko data models and APIs for products, categories, carts, and orders, including seed/sample product data available on first deploy.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Flipkart-like e-commerce app for browsing and buying items",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

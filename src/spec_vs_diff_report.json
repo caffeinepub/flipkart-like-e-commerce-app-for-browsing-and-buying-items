@@ -1,0 +1,161 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-11T13:12:59.497Z",
+  "summary": "Diff adds a substantial frontend app shell (router, navbar, product card, cart/checkout pages, React Query hooks, theme CSS) and a Motoko backend actor with product/cart/order/profile models and some catalog APIs. However, several BuildRequest requirements are either not evidenced in the diff (or are only partially implemented), and multiple unrequested features/constraint violations appear.",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Implement product catalog browsing with pagination or incremental loading.",
+      "reason": "Catalog shows a local `visibleCount` but the provided diff excerpt is truncated before any explicit \"Load more\" UI/control is shown; cannot confirm incremental loading/pagination is actually implemented and wired in the UI.",
+      "evidence": [
+        "frontend/src/pages/CatalogPage.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "Implement search and filtering for products including price range filter, and filter state survives page refresh via URL query parameters or local storage.",
+      "reason": "Catalog page implements text search, category filter, and sorting, but there is no price range filter shown. Also filter state persistence is not implemented: it initializes from URL params (`q`, `category`) but does not update URL/local storage when the user changes filters, and sort is not reflected in URL/local storage.",
+      "evidence": [
+        "frontend/src/pages/CatalogPage.tsx (truncated)",
+        "frontend/src/components/Navbar.tsx"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Create a product details page showing a larger image gallery, full description/specs, stock status, quantity selector bounded by stock, and add-to-cart from detail page.",
+      "reason": "Routes reference `ProductDetailsPage`, but the diff summary does not include the `frontend/src/pages/ProductDetailsPage.tsx` file contents, so required UI/behavior cannot be verified from the provided evidence.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Cart page includes per-item subtotal and cart subtotal, and 'Proceed to checkout' is disabled when cart is empty.",
+      "reason": "Cart page shows quantity controls and empty-state handling, but the provided excerpt is truncated before totals rendering and before the checkout button implementation (including disabled state). Per-item subtotal and subtotal display cannot be confirmed from the excerpt.",
+      "evidence": [
+        "frontend/src/pages/CartPage.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "requirement": "Checkout flow clearly indicates payment is not processed (e.g., 'Cash on delivery (demo)').",
+      "reason": "Checkout page excerpt shows form validation and order placement flow, but no text indicating demo/no-payment processing is shown in the provided portion.",
+      "evidence": [
+        "frontend/src/pages/CheckoutPage.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Orders page for signed-in users to view past orders and order details; orders persist across reloads.",
+      "reason": "Routes reference `OrdersPage` and `OrderDetailsPage`, but their implementations are not shown in the diff summary; persistence/behavior cannot be verified.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "requirement": "Guest cart persists locally and can be merged into the signed-in cart on sign-in (sensible quantity combining).",
+      "reason": "Local guest cart storage exists and is used when signed out, but there is no evidence of a merge step on sign-in that combines guest cart into the server-backed cart.",
+      "evidence": [
+        "frontend/src/lib/cartLocal.ts",
+        "frontend/src/hooks/useQueries.ts (truncated)",
+        "frontend/src/components/AuthButton.tsx"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "Backend exposes APIs to list categories and to search/filter/sort products including price range and sort options; seed at least 30 sample products on fresh deploy.",
+      "reason": "Backend shows product models and some catalog methods (getAllProducts, getProduct, searchProducts, filterByCategory, sortProductsByPrice), but the file is truncated before confirming: (a) a categories-list API, (b) price-range filtering and sorting by rating/relevance, and (c) seeding of 30+ sample products on first deploy.",
+      "evidence": [
+        "backend/main.mo (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Generated static images exist under frontend/public/assets/generated with specified filenames.",
+      "reason": "Navbar references the generated logo and cart empty-state references the empty cart illustration, but the diff summary does not provide evidence that the required image files were actually added under `frontend/public/assets/generated` (some added files are omitted due to limits).",
+      "evidence": [
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/pages/CartPage.tsx (truncated)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "User profile setup (name/email/phone) and mandatory profile modal gating shopping.",
+      "reason": "BuildRequest does not include a user profile feature; requirements focus on browsing/cart/checkout/orders/auth only.",
+      "evidence": [
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "backend/main.mo (truncated)"
+      ]
+    },
+    {
+      "description": "Backend authorization/admin-token initialization via access control mixins and `_initializeAccessControlWithSecret` usage.",
+      "reason": "BuildRequest does not request role-based access control or an admin secret token initialization mechanism.",
+      "evidence": [
+        "backend/main.mo (truncated)",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "Footer marketing link to caffeine.ai.",
+      "reason": "Not requested by BuildRequest; adds third-party branding/link not mentioned.",
+      "evidence": [
+        "frontend/src/components/Footer.tsx"
+      ]
+    },
+    {
+      "description": "Dark mode/theming via `next-themes` ThemeProvider.",
+      "reason": "BuildRequest asks for a coherent warm theme but does not request dark mode or `next-themes`.",
+      "evidence": [
+        "frontend/src/App.tsx",
+        "frontend/src/index.css"
+      ]
+    },
+    {
+      "description": "Edits/additions under explicitly immutable frontend paths (useInternetIdentity.ts, useActor.ts, main.tsx).",
+      "reason": "Constraints state these paths must not be edited; diff shows these files being added (or replaced) under those exact immutable paths.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/main.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.66,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AuthButton.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Navbar.tsx",
+    "frontend/src/components/ProductCard.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/components/QueryState.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/cartLocal.ts",
+    "frontend/src/lib/categories.ts",
+    "frontend/src/lib/money.ts",
+    "frontend/src/lib/validation.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CartPage.tsx",
+    "frontend/src/pages/CatalogPage.tsx",
+    "frontend/src/pages/CheckoutPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/OrderConfirmationPage.tsx",
+    "frontend/src/pages/OrderDetailsPage.tsx",
+    "frontend/src/pages/OrdersPage.tsx",
+    "frontend/src/pages/ProductDetailsPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}
